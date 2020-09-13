@@ -3,7 +3,7 @@ Algorithm Specifications
 Long
     If RSI below or equal 30
 Close
-    If position held longer than 2 days
+    If position held longer than 3.428 days
     If RSI is greater or equal 70
 """
 """
@@ -24,7 +24,7 @@ Alpha 0.016
 Beta 0.358
 Annual Standard Deviation 0.117
 Annual Variance 0.014
-Information Ratio- 0.232
+Information Ratio -0.232
 Tracking Error 0.157
 Treynor Ratio 0.127
 Total Fees $4263.28

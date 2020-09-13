@@ -3,7 +3,7 @@ Algorithm Specifications
 Short
     If RSI greater or equal 70
 Close
-    If longer than 24 ticks
+    If longer than 3.428 days
     If RSI is less or equal 30
 """
 """

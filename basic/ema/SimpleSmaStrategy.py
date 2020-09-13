@@ -5,7 +5,7 @@ Long
 Short
     200 SMA below 50 SMA
 Close
-    More than 14
+    More than 3.428 days
 """
 """
 Algorithm Performance

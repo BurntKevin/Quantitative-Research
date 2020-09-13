@@ -5,7 +5,7 @@ Long
 Short
     If RSI above or equal 70
 Close
-    If longer than 2 days
+    If longer than 3.428 days
 """
 """
 Algorithm Performance
