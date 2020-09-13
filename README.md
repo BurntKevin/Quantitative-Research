@@ -5,4 +5,5 @@
 # Strategies
 | Strategy          | Trades | Profit-Loss Ratio | Alpha | Beta  | Sharpe Ratio | Drawdown | Compounded Annual Return |
 |-------------------|--------|-------------------|-------|-------|--------------|----------|--------------------------|
+| BuyRsiStrategy    | 569    | 1.09              | 0.017 | 0.366 | 0.4          | 29.900%  | 3.989%                   |
 | SimpleRsiStrategy | 5908   | 1.94              | 0.004 | 0.205 | 0.149        | 51.800%  | 1.090%                   |
