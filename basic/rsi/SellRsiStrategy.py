@@ -8,60 +8,56 @@ Close
 """
 """
 Algorithm Performance
-Total Trades 794
-Average Win 1.12%
-Average Loss -0.97%
-Compounding Annual Return -0.821%
-Drawdown 46.200%
-Expectancy -0.033
-Net Profit -15.700%
-Sharpe Ratio -0.09
+Total Trades 814
+Average Win 1.08%
+Average Loss -0.93%
+Compounding Annual Return -0.210%
+Drawdown 41.100%
+Expectancy 0.000
+Net Profit -4.251%
+Sharpe Ratio 0.001
 PSR 0.000%
-Loss Rate 55%
-Win Rate 45%
+Loss Rate 54%
+Win Rate 46%
 Profit-Loss Ratio 1.16
-Alpha 0.004
-Beta -0.12
-Annual Standard Deviation 0.067
+Alpha 0.009
+Beta -0.114
+Annual Standard Deviation 0.066
 Annual Variance 0.004
-Information Ratio -0.383
-Tracking Error 0.229
-Treynor Ratio 0.05
-Total Fees $3522.92
+Information Ratio -0.359
+Tracking Error 0.228
+Treynor Ratio -0.001
+Total Fees $3836.30
 """
-class SimpleRsiStrategy(QCAlgorithm):
+class SellRsiStrategy(QCAlgorithm):
     def Initialize(self):
         # Variable parameters
-        self.traded_equity = "SPY"
-        self.periods_since_last_trade = 0
+        self.tradedEquity = "SPY"
+        self.maximumPeriodSinceLastTrade = 24
+        self.periodSinceLastTrade = 0
         self.SetStartDate(2000, 1, 1)
         self.SetEndDate(2020, 9, 9)
         self.SetCash(100000)
 
-        # Equity parameters - Traded equity and ticker timeframe
-        self.AddEquity(self.traded_equity, Resolution.Hour)
-        self.rsi = self.RSI(self.traded_equity, 14)
+        # Equity parameters - Traded equity and timeframe
+        self.AddEquity(self.tradedEquity, Resolution.Hour)
+        self.rsi = self.RSI(self.tradedEquity, 14)
     def OnData(self, data):
         # Checking if RSI is usable
         if not self.rsi.IsReady:
             return
 
-        if self.periods_since_last_trade == 24:
-            # Close out positions if it goes on for more than a day
-            self.Liquidate()
-            self.periods_since_last_trade = -1
-        elif self.rsi.Current.Value <= 30:
-            # Close position as RSI is below 30
-            self.Liquidate()
-            self.periods_since_last_trade = -1
-        elif self.rsi.Current.Value >= 70 and self.Portfolio[self.traded_equity].Invested == 0:
+        if self.rsi.Current.Value >= 70 and self.Portfolio[self.tradedEquity].Invested == 0:
             # Short as RSI is above 70
+            self.SetHoldings(self.tradedEquity, -1)
+            self.periodSinceLastTrade = 0
+        elif self.rsi.Current.Value <= 30 or self.maximumPeriodSinceLastTrade == self.periodSinceLastTrade:
+            # Close position as RSI is below 30 or if the position goes on for too long
             self.Liquidate()
-            self.SetHoldings(self.traded_equity, -1)
-            self.periods_since_last_trade = -1
+            self.periodSinceLastTrade = 0
 
         # Incrementing days since last trade
-        self.periods_since_last_trade += 1
+        self.periodSinceLastTrade += 1
 
     def OnEndOfDay(self):
-        self.Plot("Indicators","RSI", self.rsi.Current.Value)
+        self.Plot("Indicators", "RSI", self.rsi.Current.Value)
