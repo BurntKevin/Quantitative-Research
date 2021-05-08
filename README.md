@@ -7,6 +7,7 @@
 
 # Potential Issues
 * Historically SPY has shown positive growth and hence, long-term shorts are not great
+* Statically testing 20 years of data means that increased market efficiency is not factored
 
 # Important Considerations
 * Effective compound rate is important as trading means that the capital is not always fully utilised
@@ -17,6 +18,7 @@
 * Adding a maximum time period which a position is held pushes returns closer to 0
 * Some strategies work great on a daily time frame but fail on an hourly time frame (but this may be due to longer position taking)
 * Fees can take up a decent portion of revenue ranging from a minimum of 10% to over 100%
+* Reducing the timeframe to a more contemporary span reduces returns which may indicate a more efficient market as time goes on for commonly used strategies
 
 # Strategies
 | Strategy                       | Trades | Profit-Loss Ratio | Expected Value | Win Ratio | Alpha  | Beta   | Sharpe Ratio | Drawdown | Compounded Annual Return |
@@ -43,3 +45,5 @@
     * After dividend day?
 * Who Provides Growth?
   * Market capitalisation weighted or equal weighted
+* Buy On Red Days
+  * Close price then sell on next open
